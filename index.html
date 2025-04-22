@@ -9,6 +9,21 @@
     html {
       scroll-behavior: smooth;
     }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out both;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800 font-sans">
@@ -27,43 +42,48 @@
   </header>
 
   <!-- Hero -->
-  <section class="text-center py-24 bg-gray-50">
+  <section class="text-center py-24 bg-gray-50 animate-fade-in-up">
     <div class="max-w-3xl mx-auto px-4">
       <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Empowering Innovation</h2>
       <p class="text-lg md:text-xl mb-8 text-gray-600">HACMGT is your partner in turning ideas into reality. Fast. Scalable. Future-ready.</p>
-      <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-semibold transition">Get Started</a>
+      <a href="#contact" class="bg-blue-600 hover:bg-blue-700 hover:scale-105 transition-all duration-300 text-white px-6 py-3 rounded-md font-semibold">
+        Get Started
+      </a>
     </div>
   </section>
 
-  <!-- Features -->
-  <section id="features" class="py-20 bg-white">
+<!-- Features -->
+<section id="features" class="py-20 bg-white">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-4 text-center">
-      <div>
+      <div class="animate-fade-in-up">
         <div class="text-4xl mb-4">⚡</div>
         <h3 class="text-xl font-bold mb-2">Speed</h3>
         <p class="text-gray-600">Launch faster with tools designed for modern teams.</p>
       </div>
-      <div>
+      <div class="animate-fade-in-up delay-150">
         <div class="text-4xl mb-4">🔧</div>
         <h3 class="text-xl font-bold mb-2">Flexibility</h3>
         <p class="text-gray-600">Custom solutions to fit your unique needs.</p>
       </div>
-      <div>
+      <div class="animate-fade-in-up delay-300">
         <div class="text-4xl mb-4">🌍</div>
         <h3 class="text-xl font-bold mb-2">Global Reach</h3>
         <p class="text-gray-600">Build with scale in mind from day one.</p>
       </div>
     </div>
   </section>
+  
 
   <!-- Call to Action -->
   <section class="py-16 bg-blue-600 text-white text-center">
     <h2 class="text-3xl font-bold mb-4">Let’s build something amazing together</h2>
     <p class="mb-6">Start your journey with HACMGT today.</p>
-    <a href="#contact" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-md hover:bg-gray-100">Join Now</a>
+    <a href="#contact" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-md hover:bg-gray-100 animate-pulse">
+      Join Now
+    </a>
   </section>
 
-  <!-- Contact (Footer) -->
+  <!-- Footer -->
   <footer id="contact" class="bg-gray-800 text-white text-center py-6">
     <p>&copy; 2025 HACMGT. All rights reserved.</p>
     <p><a href="mailto:info@hacmgt.com" class="underline">info@hacmgt.com</a></p>
