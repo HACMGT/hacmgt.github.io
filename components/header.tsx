@@ -56,6 +56,12 @@ export function Header() {
               Contact
             </button>
           </nav>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="md:hidden bg-navy text-cream px-4 py-2 rounded-md hover:bg-navy/90 transition-colors font-medium"
+          >
+            Contact Us
+          </button>
         </div>
       </div>
     </header>

@@ -27,6 +27,10 @@ export function Contact() {
         body: formData,
       })
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
       const data = await response.json()
 
       if (data.success) {
@@ -36,9 +40,10 @@ export function Contact() {
         })
         e.currentTarget.reset()
       } else {
-        throw new Error("Failed to send message")
+        throw new Error(data.message || "Failed to send message")
       }
     } catch (error) {
+      console.error("Contact form error:", error)
       toast({
         title: "Error",
         description: "Failed to send message. Please try again or email us directly.",
@@ -94,6 +99,7 @@ export function Contact() {
                 <input type="hidden" name="access_key" value="e46fb4fb-3e34-45d1-879e-aad23f04b15d" />
                 
                 {/* Optional: Redirect after submission */}
+                <input type="hidden" name="redirect" value="false" />
                 
                 {/* Optional: Custom subject line */}
                 <input type="hidden" name="subject" value="New Contact Form Submission from HACMGT Website" />
