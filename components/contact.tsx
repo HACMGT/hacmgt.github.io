@@ -19,12 +19,32 @@ export function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     
     // Convert FormData to JSON object
     const formObject = Object.fromEntries(formData.entries())
     
     try {
+      // Check if we're in development mode
+      const isDevelopment = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost'
+      
+      if (isDevelopment) {
+        console.log("Development mode - simulating successful form submission")
+        console.log("Form data that would be sent:", formObject)
+        
+        // Simulate a delay
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        
+        // Always show success in development
+        toast({
+          title: "Message sent! (Development Mode)",
+          description: "In production, this would send an actual email.",
+        })
+        form.reset()
+        return
+      }
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -46,7 +66,7 @@ export function Contact() {
           title: "Message sent!",
           description: "We'll get back to you as soon as possible.",
         })
-        e.currentTarget.reset()
+        form.reset()
       } else {
         throw new Error("Failed to send message")
       }
