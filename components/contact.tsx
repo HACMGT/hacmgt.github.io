@@ -32,15 +32,16 @@ export function Contact() {
       }
 
       const data = await response.json()
+      console.log("Web3Forms response:", data)
 
-      if (data.success) {
+      if (data.success === true) {
         toast({
           title: "Message sent!",
           description: "We'll get back to you as soon as possible.",
         })
         e.currentTarget.reset()
       } else {
-        throw new Error(data.message || "Failed to send message")
+        throw new Error(data.body?.message || data.message || "Failed to send message")
       }
     } catch (error) {
       console.error("Contact form error:", error)
