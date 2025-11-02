@@ -20,28 +20,40 @@ export function Contact() {
     setIsSubmitting(true)
 
     const formData = new FormData(e.currentTarget)
-
+    
+    // Convert FormData to JSON object
+    const formObject = Object.fromEntries(formData.entries())
+    
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formObject),
       })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
+      console.log("Response status:", response.status, response.statusText)
 
       const data = await response.json()
       console.log("Web3Forms response:", data)
 
-      if (data.success === true) {
+      // Multiple success indicators for robust handling
+      const isSuccess = response.ok && (
+        data.success === true || 
+        data.success === "true" ||
+        (response.status === 200 && !data.error && !data.message?.toLowerCase().includes('error'))
+      )
+
+      if (isSuccess) {
         toast({
           title: "Message sent!",
           description: "We'll get back to you as soon as possible.",
         })
         e.currentTarget.reset()
       } else {
-        throw new Error(data.body?.message || data.message || "Failed to send message")
+        throw new Error(data.message || data.body?.message || "Failed to send message")
       }
     } catch (error) {
       console.error("Contact form error:", error)
